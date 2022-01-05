@@ -1,13 +1,16 @@
-build:
-	docker build -t app .
+build: stop
+	docker-compose build
+
+stop: 
+	docker-compose down
 
 test: build
-	docker run -t app go test -v
+	docker-compose exec -T app "go test -v"
 
 run: build
-	docker run -t app 
+	docker-compose up
 
 shell: 
-	docker run -t app /bin/bash
+	docker-compose run app bash
 
 .PHONY: build test
