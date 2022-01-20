@@ -5,9 +5,9 @@ stop:
 	docker-compose down
 
 test: build
-	docker-compose exec -T app "go test -v"
+	docker-compose exec -T app "go test -v ./..."
 
-run: build
+serve: build
 	docker-compose up
 
 shell: 
