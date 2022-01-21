@@ -1,6 +1,4 @@
-package world
-
-import "fmt"
+package main
 
 /*
 Any live cell with fewer than two live neighbours dies (referred to as underpopulation or exposure[1]).
@@ -9,7 +7,19 @@ Any live cell with two or three live neighbours lives, unchanged, to the next ge
 Any dead cell with exactly three live neighbours will come to life.
 */
 
-func calculate_neighbours(cell Cell, cells [16]Cell) []Cell {
+func calculate_next_tick_cell_state(cell Cell, live_neighbours []Cell) Cell {
+	live_neighbour_count := len(live_neighbours)
+
+	if live_neighbour_count < 2 || live_neighbour_count > 3 {
+		cell.Alive = false
+	} else if live_neighbour_count == 3 {
+		cell.Alive = true
+	}
+
+	return cell
+}
+
+func calculate_neighbours(cell Cell, cells [25]Cell) []Cell {
 	var neighbours []Cell
 
 	for _, v := range cells {
@@ -35,11 +45,14 @@ func live_neighbours(neighbours []Cell) []Cell {
 	return live_cells
 }
 
-func calculate(cells [16]Cell) [16]Cell {
-	for _, cell := range cells {
-		fmt.Println(cell)
-		fmt.Println(live_neighbours(calculate_neighbours(cell, cells)))
+func calculate(cells [25]Cell) [25]Cell {
+	var new_cells [25]Cell
+	var new_cell Cell
+
+	for i, cell := range cells {
+		new_cell = calculate_next_tick_cell_state(cell, live_neighbours(calculate_neighbours(cell, cells)))
+		new_cells[i] = new_cell
 	}
 
-	return cells
+	return new_cells
 }
