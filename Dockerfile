@@ -5,4 +5,4 @@ WORKDIR /app
 RUN apk update && apk add build-base bash git
 RUN go get github.com/stretchr/testify
 
-CMD ["sleep", "infinity"]
+CMD ["./scripts/bootstrap.sh"]

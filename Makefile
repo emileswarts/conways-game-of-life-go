@@ -8,6 +8,9 @@ test: build
 	docker-compose exec -T app "go test -v ./..."
 
 serve: build
+	docker-compose run app sh -c "sleep infinity"
+
+run: build
 	docker-compose up
 
 shell: 

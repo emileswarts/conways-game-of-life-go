@@ -4,3 +4,4 @@ services:
       context: .
     volumes:
       - './src/:/app'
+      - './scripts/:/app/scripts'
