@@ -2,6 +2,13 @@ package world
 
 import "fmt"
 
+/*
+Any live cell with fewer than two live neighbours dies (referred to as underpopulation or exposure[1]).
+Any live cell with more than three live neighbours dies (referred to as overpopulation or overcrowding).
+Any live cell with two or three live neighbours lives, unchanged, to the next generation.
+Any dead cell with exactly three live neighbours will come to life.
+*/
+
 func calculate_neighbours(cell Cell, cells [16]Cell) []Cell {
 	var neighbours []Cell
 
