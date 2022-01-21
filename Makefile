@@ -10,7 +10,7 @@ test: build
 serve: build
 	docker-compose run gol sh -c "sleep infinity"
 
-run: build
+run: 
 	docker-compose up
 
 shell: 
